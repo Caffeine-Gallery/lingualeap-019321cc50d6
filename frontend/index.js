@@ -6,6 +6,7 @@ const translateBtn = document.getElementById('translateBtn');
 const outputText = document.getElementById('outputText');
 const speakBtn = document.getElementById('speakBtn');
 const spinner = document.getElementById('spinner');
+const logo = document.getElementById('logo');
 
 translateBtn.addEventListener('click', translateText);
 speakBtn.addEventListener('click', speakText);
@@ -60,3 +61,23 @@ function speakText() {
     utterance.lang = languageSelect.value;
     speechSynthesis.speak(utterance);
 }
+
+function animateLogo() {
+    const animations = ['spin', 'bounce'];
+    const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+    logo.classList.add(randomAnimation);
+    
+    setTimeout(() => {
+        logo.classList.remove(randomAnimation);
+    }, 2000);
+}
+
+function scheduleNextAnimation() {
+    const delay = Math.floor(Math.random() * 5000) + 2000; // Random delay between 2-7 seconds
+    setTimeout(() => {
+        animateLogo();
+        scheduleNextAnimation();
+    }, delay);
+}
+
+scheduleNextAnimation();
